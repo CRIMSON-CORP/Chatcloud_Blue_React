@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useEffect } from "react";
+import Main from "./Components/Main";
+import { BrowserRouter as Router } from "react-router-dom";
+import PostsBlock from "./Components/utils/context";
+import { BiUpArrowAlt } from "react-icons/bi";
+import "jquery.easing";
+import $ from "jquery";
+import { TweenLite, gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    useEffect(() => {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $(".back-to-top").fadeIn("slow");
+            } else {
+                $(".back-to-top").fadeOut("slow");
+            }
+        });
+    }, []);
+    gsap.registerPlugin(ScrollToPlugin);
+    return (
+        <Router>
+            <PostsBlock>
+                <Main />
+            </PostsBlock>
+            <a
+                className="back-to-top"
+                onClick={() => {
+                    TweenLite.to(window, 1, { scrollTo: { y: 0 }, ease: "Power4.inOut()" });
+                }}
+            >
+                <BiUpArrowAlt size=".7rem" />
+            </a>
+        </Router>
+    );
 }
 
 export default App;
