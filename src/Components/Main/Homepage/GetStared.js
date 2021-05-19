@@ -1,7 +1,6 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 function GetStared() {
-    const history = useHistory();
     return (
         <section id="start">
             <div className="text-center content">
@@ -12,14 +11,17 @@ function GetStared() {
                 </p>
                 <button className="slide px-3 py-2 text-uppercase rounded">
                     <span className="text">
-                        <a
+                        <Link
+                            to="/contact"
                             onClick={(e) => {
-                                e.preventDefault();
-                                history.push("/contact");
+                                window.scrollTo({
+                                    top: 0,
+                                    scrollBehavior: "auto",
+                                });
                             }}
                         >
                             Contact Us
-                        </a>
+                        </Link>
                     </span>
                 </button>
             </div>

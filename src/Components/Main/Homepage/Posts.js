@@ -28,7 +28,15 @@ export default Posts;
 function Box({ link, image, text }) {
     return (
         <div>
-            <Link to={link}>
+            <Link
+                to={link}
+                onClick={() => {
+                    window.scrollTo({
+                        top: 0,
+                        scrollBehavior: "auto",
+                    });
+                }}
+            >
                 <img src={image} alt="" />
                 <div className="back">
                     <div>

@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { PostContext } from "../utils/context";
-import { Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import NavBar from "./Homepage/NavBar";
 import { Markup } from "interweave";
 import { gsap } from "gsap";
 import GetStared from "./Homepage/GetStared";
-import { useHistory } from "react-router-dom";
 function BlogPost() {
     const { posts } = useContext(PostContext);
     useEffect(() => {
@@ -141,7 +140,6 @@ function BlogPost() {
 export default BlogPost;
 
 function Card({ h4, p, link }) {
-    const history = useHistory();
     return (
         <div className="col-md-4">
             <div className="card shadow border-0 rounded-0">
@@ -155,18 +153,17 @@ function Card({ h4, p, link }) {
                     <div className="card-text">{<Markup content={p} tagName={"fragment"} />}</div>
                     <button className="btn read_more  slide invert shadow">
                         <span className="text">
-                            <a
+                            <Link
+                                to={`/${link}`}
                                 onClick={() => {
-                                    document.querySelector("body").scrollTop = 0;
                                     window.scrollTo({
                                         top: 0,
                                         scrollBehavior: "auto",
                                     });
-                                    history.push(`/${link}`);
                                 }}
                             >
                                 Read more...
-                            </a>
+                            </Link>
                         </span>
                     </button>
                 </div>

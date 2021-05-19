@@ -1,7 +1,6 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 function NavBar({ white }) {
-    const history = useHistory();
     return (
         <header
             className={`d-flex justify-content-between p-3 px-5 align-items-center ${
@@ -19,32 +18,19 @@ function NavBar({ white }) {
             <nav className="d-flex align-items-center">
                 <ul className="navlinks pop list-unstyled d-flex align-items-center m-0">
                     <li className="navlinkItem home">
-                        <span
-                            onClick={() => {
-                                history.push("/");
-                            }}
-                        >
+                        <NavLink to="/" activeClassName="active" exact>
                             Home
-                        </span>
+                        </NavLink>
                     </li>
                     <li className="navlinkItem">
-                        <span
-                            onClick={() => {
-                                history.push("/services");
-                            }}
-                        >
+                        <NavLink to="/services" activeClassName="active">
                             Services
-                        </span>
+                        </NavLink>
                     </li>
                     <li className="navlinkItem link-drop">
-                        <span
-                            onClick={() => {
-                                history.push("/industries");
-                            }}
-                            id="ind_dropList"
-                        >
+                        <NavLink to="/industries" activeClassName="active" id="ind_dropList">
                             Industries
-                        </span>
+                        </NavLink>
                         <div className="dropdown">
                             <ul className="list-unstyled">
                                 <li>
@@ -115,22 +101,14 @@ function NavBar({ white }) {
                         </div>
                     </li>
                     <li className="navlinkItem">
-                        <span
-                            onClick={() => {
-                                history.push("/pricing");
-                            }}
-                        >
+                        <NavLink to="/pricing" activeClassName="active">
                             Pricing
-                        </span>
+                        </NavLink>
                     </li>
                     <li className="navlinkItem">
-                        <span
-                            onClick={() => {
-                                history.push("/contact");
-                            }}
-                        >
+                        <NavLink to="/contact" activeClassName="active">
                             Contact Us
-                        </span>
+                        </NavLink>
                     </li>
                 </ul>
             </nav>

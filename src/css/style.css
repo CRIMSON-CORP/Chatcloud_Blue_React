@@ -297,14 +297,14 @@ ul.navlinks {
     display: inline-block;
 }
 
-.navlinkItem span {
+.navlinkItem a {
     color: #2e54bf !important;
     padding: 6px 12px;
     position: relative;
     cursor: pointer;
 }
 
-.navlinks .navlinkItem span::before {
+.navlinks .navlinkItem a::before {
     position: absolute;
     display: inline-block;
     bottom: 0px;
@@ -317,8 +317,8 @@ ul.navlinks {
     transform: scaleX(0);
     transition: all 0.3s ease-in-out 0.125s;
 }
-.navlinks .navlinkItem:hover span::before,
-.navlinks .navlinkItem.active span::before {
+.navlinks .navlinkItem:hover a::before,
+.navlinks .navlinkItem a.active::before {
     transform: scaleX(1);
 }
 
@@ -444,7 +444,7 @@ ul.navlinks {
         overflow: hidden;
         display: block;
     }
-    nav ul li.navlinkItem span {
+    nav ul li.navlinkItem a {
         font-family: "PlayFair Display";
         font-size: 26px;
         padding: 10px 16px;
@@ -453,7 +453,7 @@ ul.navlinks {
         text-transform: uppercase;
         opacity: 0;
     }
-    nav ul li.navlinkItem span::before {
+    nav ul li.navlinkItem a::before {
         bottom: 50%;
         left: 0;
         -webkit-transform: translateY(50%) scaleX(0);
@@ -465,8 +465,8 @@ ul.navlinks {
         -webkit-transform-origin: right;
         transform-origin: right;
     }
-    nav ul li.navlinkItem span.active::before,
-    nav ul li.navlinkItem span:hover::before {
+    nav ul li.navlinkItem a.active::before,
+    nav ul li.navlinkItem a:hover::before {
         -webkit-transform: translateY(50%) scaleX(1);
         transform: translateY(50%) scaleX(1);
         -webkit-transform-origin: left;
