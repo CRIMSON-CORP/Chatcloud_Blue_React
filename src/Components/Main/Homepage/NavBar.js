@@ -1,23 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 function NavBar({ white }) {
     const history = useHistory();
-
-    useEffect(() => {
-        var marker = document.querySelector("span.indicator");
-        var item = document.querySelectorAll(".navlinkItem");
-        const home = document.querySelector(".home");
-        function indicator(e) {
-            marker.style.left = e.offsetLeft + "px";
-            marker.style.width = e.offsetWidth + "px";
-        }
-
-        item.forEach((link) => {
-            link.addEventListener("click", function (e) {
-                indicator(this);
-            });
-        });
-    }, []);
     return (
         <header
             className={`d-flex justify-content-between p-3 px-5 align-items-center ${
@@ -34,7 +18,6 @@ function NavBar({ white }) {
             </svg>
             <nav className="d-flex align-items-center">
                 <ul className="navlinks pop list-unstyled d-flex align-items-center m-0">
-                    <span className="indicator"></span>
                     <li className="navlinkItem home">
                         <span
                             onClick={() => {

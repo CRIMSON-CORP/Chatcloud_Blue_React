@@ -6,6 +6,7 @@ import Three from "../../../images/posts/Three.jpg";
 import Four from "../../../images/posts/Four.jpg";
 import Five from "../../../images/posts/Five.jpg";
 import { PostContext } from "../../utils/context";
+import { Markup } from "interweave";
 function Posts() {
     const { posts } = useContext(PostContext);
 
@@ -30,7 +31,9 @@ function Box({ link, image, text }) {
             <Link to={link}>
                 <img src={image} alt="" />
                 <div className="back">
-                    <p>{text}</p>
+                    <div>
+                        <Markup content={text} />
+                    </div>
                 </div>
             </Link>
         </div>

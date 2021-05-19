@@ -10,7 +10,6 @@ function PostsBlock({ children }) {
                 data = await data.json();
                 setPosts(data);
                 setLoading(false);
-                console.log(data);
             } catch (err) {
                 console.log(err);
             }

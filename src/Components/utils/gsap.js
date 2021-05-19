@@ -64,7 +64,6 @@ export function AllAnimations() {
         NavLinks[index].addEventListener("click", () => {
             nav_timeline.reverse();
             mobile_click.reverse();
-            console.log(1);
         });
     }
 

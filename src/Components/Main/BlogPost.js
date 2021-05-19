@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { PostContext } from "../utils/context";
 import { Route } from "react-router-dom";
 import NavBar from "./Homepage/NavBar";
 import { Markup } from "interweave";
+import { gsap } from "gsap";
 import GetStared from "./Homepage/GetStared";
+import { useHistory } from "react-router-dom";
 function BlogPost() {
     const { posts } = useContext(PostContext);
     useEffect(() => {
@@ -11,6 +13,42 @@ function BlogPost() {
         return () => {
             document.querySelector("body").classList.remove("blog");
         };
+    }, []);
+
+    const Idn_image = useRef();
+    const Idn_content = useRef();
+    const Blog_head = useRef();
+    useEffect(() => {
+        const timeline = gsap.timeline({});
+        timeline
+            .from(Blog_head.current.children, {
+                y: 50,
+                opacity: 0,
+                ease: "power4.Out",
+                duration: 0.75,
+                delay: 0.5,
+                stagger: { each: 0.25 },
+            })
+            .to(
+                Idn_image.current,
+                {
+                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                    ease: "power4.inOut",
+                    duration: 2.5,
+                },
+                "-=0.5"
+            )
+            .from(
+                Idn_content.current.children,
+                {
+                    y: 50,
+                    opacity: 0,
+                    ease: "power4.Out",
+                    duration: 0.75,
+                    stagger: { each: 0.125 },
+                },
+                "-=1.5"
+            );
     }, []);
     function formatDate(date) {
         var monthNames = [
@@ -35,29 +73,59 @@ function BlogPost() {
         return monthNames[monthIndex] + " " + day + " " + year;
     }
 
-    const postsJSX = posts.map(({ slug, date, content }) => {
+    const postsJSX = posts.map(({ slug, date, content, title }, index) => {
+        let others = [...posts];
+        if (index === posts.length - 1) {
+            others = [posts[index - 3], posts[index - 2], posts[index - 1]];
+        } else if (index === 0) {
+            others = [posts[index + 1], posts[index + 2], posts[index + 3]];
+        } else if (index === posts.length - 2) {
+            others = [posts[index - 2], posts[index - 1], posts[index + 1]];
+        } else if (index === 1) {
+            others = [posts[index - 1], posts[index + 1], posts[index + 2]];
+        } else {
+            others = [posts[index - 2], posts[index - 1], posts[index + 1]];
+        }
         return (
-            <Route path={`/${slug}`} exact>
-                <main class="px-0 px-md-5">
-                    <div class="blog-title  px-4 pt-5 px-md-5 blog_head">
-                        <p class="text-white mt-0 mb-3 display-2 head">How Does it Work?</p>
-                        <p class="date-posted">Posted on {formatDate(new Date(date))}</p>
+            <Route path={`/${slug}`} exact key={index}>
+                <main className="px-0 px-md-5">
+                    <div className="blog-title  px-4 pt-5 px-md-5 blog_head" ref={Blog_head}>
+                        <div className="text-white mt-0 mb-3 display-2 head">
+                            <Markup content={title.rendered} />
+                        </div>
+                        <p className="date-posted">Posted on {formatDate(new Date(date))}</p>
                     </div>
-                    <div class="grid my-3 h-100 px-md-5 px-4 ">
-                        <div class="h-100">
+                    <div className="grid my-3 h-100 px-md-5 px-4 ">
+                        <div className="h-100">
                             <img
                                 src="../../img/posts/post_big/4.jpg"
                                 alt=""
                                 style={{ objectPosition: "25% 50%" }}
+                                ref={Idn_image}
                             />
                         </div>
-                        <div class="content mb-5  mt-lg-0">
-                            <p>
-                                <Markup content={content.rendered} />
-                            </p>
+                        <div className="content mb-5  mt-lg-0" ref={Idn_content}>
+                            <Markup content={content.rendered} tagName={"fragment"} />
                         </div>
                     </div>
                 </main>
+
+                <div className="other-posts p-md-5 px-3 px-md-4 pb-5">
+                    <div className="wrapper">
+                        <div className="row posts">
+                            {others.map(({ excerpt, slug, title }, index) => {
+                                return (
+                                    <Card
+                                        link={slug}
+                                        h4={title.rendered}
+                                        p={excerpt.rendered}
+                                        key={index}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
             </Route>
         );
     });
@@ -71,3 +139,38 @@ function BlogPost() {
 }
 
 export default BlogPost;
+
+function Card({ h4, p, link }) {
+    const history = useHistory();
+    return (
+        <div className="col-md-4">
+            <div className="card shadow border-0 rounded-0">
+                <img
+                    className="card-img-top  rounded-0"
+                    src="../../img/posts/post_big/3.jpg"
+                    alt="Card image"
+                />
+                <div className="card-body">
+                    <h4 className="card-title">{<Markup content={h4} tagName={"fragment"} />}</h4>
+                    <div className="card-text">{<Markup content={p} tagName={"fragment"} />}</div>
+                    <button className="btn read_more  slide invert shadow">
+                        <span className="text">
+                            <a
+                                onClick={() => {
+                                    document.querySelector("body").scrollTop = 0;
+                                    window.scrollTo({
+                                        top: 0,
+                                        scrollBehavior: "auto",
+                                    });
+                                    history.push(`/${link}`);
+                                }}
+                            >
+                                Read more...
+                            </a>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}

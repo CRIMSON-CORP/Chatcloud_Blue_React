@@ -1,13 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
 import Main from "./Components/Main";
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import PostsBlock from "./Components/utils/context";
 import { BiUpArrowAlt } from "react-icons/bi";
 import "jquery.easing";
 import $ from "jquery";
-import { TweenLite, gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 function App() {
     useEffect(() => {
         $(window).scroll(function () {
@@ -18,16 +16,21 @@ function App() {
             }
         });
     }, []);
-    gsap.registerPlugin(ScrollToPlugin);
     return (
-        <Router>
+        <Router basename={process.env.PUBLIC_URL}>
             <PostsBlock>
                 <Main />
             </PostsBlock>
             <a
                 className="back-to-top"
                 onClick={() => {
-                    TweenLite.to(window, 1, { scrollTo: { y: 0 }, ease: "Power4.inOut()" });
+                    $("html, body").animate(
+                        {
+                            scrollTop: 0,
+                        },
+                        1500,
+                        "easeInOutExpo"
+                    );
                 }}
             >
                 <BiUpArrowAlt size=".7rem" />
