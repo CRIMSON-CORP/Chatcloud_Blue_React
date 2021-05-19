@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import One from "../../../images/industries/1.jpg";
 import Two from "../../../images/industries/2.jpg";
 import Three from "../../../images/industries/3.jpg";
@@ -12,6 +12,11 @@ import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 function Industries() {
     const image_labels = document.querySelectorAll("label");
 
+    const radio = useRef()
+
+    useEffect(()=>{
+        radio.current.checked = true
+    },[])
     var slideIndex = 1;
     showSlides(slideIndex);
 
@@ -63,7 +68,7 @@ function Industries() {
                     >
                         <FaCaretRight />
                     </button>
-                    <input type="radio" name="slider" id="s1" className="input" checked />
+                    <input type="radio" name="slider" id="s1" className="input" ref={radio} />
                     <input type="radio" name="slider" id="s2" className="input" />
                     <input type="radio" name="slider" id="s3" className="input" />
                     <input type="radio" name="slider" id="s4" className="input" />

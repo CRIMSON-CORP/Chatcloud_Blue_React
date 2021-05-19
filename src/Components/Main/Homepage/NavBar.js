@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { NavBarAnim } from "../../utils/gsap";
 function NavBar({ white }) {
+    useEffect(() => {
+        NavBarAnim();
+    }, []);
     return (
         <header
             className={`d-flex justify-content-between p-3 px-5 align-items-center ${
@@ -28,7 +32,16 @@ function NavBar({ white }) {
                         </NavLink>
                     </li>
                     <li className="navlinkItem link-drop">
-                        <NavLink to="/industries" activeClassName="active" id="ind_dropList">
+                        <NavLink
+                            to="/industries"
+                            activeClassName="active"
+                            id="ind_dropList"
+                            onClick={(e) => {
+                                if (window.innerWidth <= 1000) {
+                                    e.preventDefault();
+                                }
+                            }}
+                        >
                             Industries
                         </NavLink>
                         <div className="dropdown">

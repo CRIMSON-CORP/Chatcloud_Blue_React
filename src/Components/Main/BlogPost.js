@@ -19,35 +19,38 @@ function BlogPost() {
     const Blog_head = useRef();
     useEffect(() => {
         const timeline = gsap.timeline({});
-        timeline
-            .from(Blog_head.current.children, {
-                y: 50,
-                opacity: 0,
-                ease: "power4.Out",
-                duration: 0.75,
-                delay: 0.5,
-                stagger: { each: 0.25 },
-            })
-            .to(
-                Idn_image.current,
-                {
-                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-                    ease: "power4.inOut",
-                    duration: 2.5,
-                },
-                "-=0.5"
-            )
-            .from(
-                Idn_content.current.children,
-                {
+        Blog_head.current &&
+            Idn_content.current &&
+            Idn_image.current &&
+            timeline
+                .from(Blog_head.current.children, {
                     y: 50,
                     opacity: 0,
                     ease: "power4.Out",
                     duration: 0.75,
-                    stagger: { each: 0.125 },
-                },
-                "-=1.5"
-            );
+                    delay: 0.5,
+                    stagger: { each: 0.25 },
+                })
+                .to(
+                    Idn_image.current,
+                    {
+                        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                        ease: "power4.inOut",
+                        duration: 2.5,
+                    },
+                    "-=0.5"
+                )
+                .from(
+                    Idn_content.current.children,
+                    {
+                        y: 50,
+                        opacity: 0,
+                        ease: "power4.Out",
+                        duration: 0.75,
+                        stagger: { each: 0.125 },
+                    },
+                    "-=1.5"
+                );
     }, []);
     function formatDate(date) {
         var monthNames = [
@@ -71,8 +74,7 @@ function BlogPost() {
 
         return monthNames[monthIndex] + " " + day + " " + year;
     }
-
-    const postsJSX = posts.map(({ slug, date, content, title }, index) => {
+    const postsJSX = posts.map(({ slug, date, content, title, imgUrl }, index) => {
         let others = [...posts];
         if (index === posts.length - 1) {
             others = [posts[index - 3], posts[index - 2], posts[index - 1]];
@@ -94,11 +96,12 @@ function BlogPost() {
                         </div>
                         <p className="date-posted">Posted on {formatDate(new Date(date))}</p>
                     </div>
-                    <div className="grid my-3 h-100 px-md-5 px-4 ">
-                        <div className="h-100">
+                    <div className="grid my-3 h-100 px-md-5 px-4 mb-4">
+                        <div className="w-100">
                             <img
-                                src="../../img/posts/post_big/4.jpg"
+                                src={imgUrl}
                                 alt=""
+                                className="w-100"
                                 style={{ objectPosition: "25% 50%" }}
                                 ref={Idn_image}
                             />
@@ -112,13 +115,14 @@ function BlogPost() {
                 <div className="other-posts p-md-5 px-3 px-md-4 pb-5">
                     <div className="wrapper">
                         <div className="row posts">
-                            {others.map(({ excerpt, slug, title }, index) => {
+                            {others.map(({ excerpt, slug, title, imgUrl }, index) => {
                                 return (
                                     <Card
                                         link={slug}
                                         h4={title.rendered}
                                         p={excerpt.rendered}
                                         key={index}
+                                        img={imgUrl}
                                     />
                                 );
                             })}
@@ -139,15 +143,11 @@ function BlogPost() {
 
 export default BlogPost;
 
-function Card({ h4, p, link }) {
+function Card({ h4, p, link, img }) {
     return (
         <div className="col-md-4">
             <div className="card shadow border-0 rounded-0">
-                <img
-                    className="card-img-top  rounded-0"
-                    src="../../img/posts/post_big/3.jpg"
-                    alt="Card image"
-                />
+                <img className="card-img-top  rounded-0" src={img} alt="Card image" />
                 <div className="card-body">
                     <h4 className="card-title">{<Markup content={h4} tagName={"fragment"} />}</h4>
                     <div className="card-text">{<Markup content={p} tagName={"fragment"} />}</div>
