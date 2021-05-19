@@ -10,7 +10,7 @@ import {
 import { ContactAnim } from "../../utils/gsap";
 function Contact() {
     useEffect(() => {
-        window.scrollY = 0;
+        document.querySelector("body").scrollTop = 0;
         ContactAnim();
     }, []);
     return (

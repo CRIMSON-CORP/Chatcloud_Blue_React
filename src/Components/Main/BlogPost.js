@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { PostContext } from "../utils/context";
 import { Route } from "react-router-dom";
 import NavBar from "./Homepage/NavBar";
@@ -6,7 +6,12 @@ import { Markup } from "interweave";
 import GetStared from "./Homepage/GetStared";
 function BlogPost() {
     const { posts } = useContext(PostContext);
-    document.querySelector("body").classList.add("blog");
+    useEffect(() => {
+        document.querySelector("body").classList.add("blog");
+        return () => {
+            document.querySelector("body").classList.remove("blog");
+        };
+    }, []);
     function formatDate(date) {
         var monthNames = [
             "Jan",

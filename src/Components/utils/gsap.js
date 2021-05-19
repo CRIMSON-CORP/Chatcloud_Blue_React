@@ -15,7 +15,7 @@ export function AllAnimations() {
 
     // NAV
     const Nav = get("nav");
-    const NavLinks = getAll("nav a");
+    const NavLinks = getAll("nav span");
 
     // Hero Section
     const span_blue = get("#hero span.bg");
@@ -59,6 +59,14 @@ export function AllAnimations() {
             nav_timeline.reverse();
         }
     });
+
+    for (let index = 0; index < NavLinks.length; index++) {
+        NavLinks[index].addEventListener("click", () => {
+            nav_timeline.reverse();
+            mobile_click.reverse();
+            console.log(1);
+        });
+    }
 
     // Hero section timeline Expanded
     Hero_section_timeline.to(span_blue, { opacity: 1, duration: 1 })

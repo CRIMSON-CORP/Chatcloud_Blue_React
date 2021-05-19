@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
 import Main from "./Components/Main";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 import PostsBlock from "./Components/utils/context";
 import { BiUpArrowAlt } from "react-icons/bi";
 import "jquery.easing";

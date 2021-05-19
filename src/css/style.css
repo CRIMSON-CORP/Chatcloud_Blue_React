@@ -1708,23 +1708,33 @@ body.blog .other-posts .wrapper .card button {
     backdrop-filter: blur(20px);
 }
 
-#hero.home header {
+header {
     background: none;
     backdrop-filter: none;
     transition: all 0.5s ease-out;
 }
-#hero.home header.home_sticky {
+
+header.white + div,
+header.white + section,
+header.white + main {
+    margin-top: 56px;
+}
+header.home_sticky {
     background: rgba(255, 255, 255, 0.8);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 #hero.home header .logo a {
     transition: color 0.5s ease-out;
 }
-#hero.home header.home_sticky .logo a {
+header.home_sticky .logo a {
     color: #2e54bf !important;
 }
-#hero.home header.home_sticky svg line {
+header.home_sticky svg line {
     stroke: #2e54bf;
 }
 

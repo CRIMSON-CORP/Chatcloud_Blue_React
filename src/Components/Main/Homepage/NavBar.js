@@ -23,12 +23,11 @@ function NavBar({ white }) {
             className={`d-flex justify-content-between p-3 px-5 align-items-center ${
                 white ? "white" : ""
             }`}
-            style={{ height: `${white ? "auto" : ""}`, position: `${white ? "relative" : ""}` }}
         >
             <div className={`logo pop ${white && "blue"}`}>
                 <a href="/">Chatcloud</a>
             </div>
-            <svg viewBox="0 0 78 43.5" className="mobile_nav">
+            <svg viewBox="0 0 78 43.5" className={`mobile_nav ${white ? "blue" : ""}`}>
                 <line className="cls-1 one" y1="2.5" x2="78" y2="2.5" />
                 <line className="cls-1 two" y1="21.75" x2="78" y2="21.75" />
                 <line className="cls-1 three" y1="41" x2="78" y2="41" />
