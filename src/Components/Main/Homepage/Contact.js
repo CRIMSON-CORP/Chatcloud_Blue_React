@@ -56,7 +56,7 @@ function Contact() {
                                 placeholder="John Doe"
                             />
                         </div>
-                        <div className="form-group mt-3">
+                        <div className="form-group mt-4">
                             <label htmlFor="email">Email</label>
                             <input
                                 type="email"
@@ -65,7 +65,7 @@ function Contact() {
                                 placeholder="johndoe@email.com"
                             />
                         </div>
-                        <div className="form-group mt-3">
+                        <div className="form-group mt-4">
                             <label htmlFor="message">Message</label>
                             <textarea
                                 id=""

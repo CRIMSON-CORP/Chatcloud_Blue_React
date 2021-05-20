@@ -444,7 +444,7 @@ ul.navlinks {
         overflow: hidden;
         display: block;
     }
-    nav ul li.navlinkItem a {
+    nav ul li.navlinkItem > a {
         font-family: "PlayFair Display";
         font-size: 26px;
         padding: 10px 16px;
@@ -452,6 +452,9 @@ ul.navlinks {
         font-weight: 700;
         text-transform: uppercase;
         opacity: 0;
+    }
+    nav .dropdown a {
+        opacity: 1;
     }
     nav ul li.navlinkItem a::before {
         bottom: 50%;
@@ -714,7 +717,6 @@ ul.navlinks {
         display: inline-block;
         font-weight: 700;
         text-transform: uppercase;
-        opacity: 0;
         text-align: center;
         width: 100%;
         background: none;

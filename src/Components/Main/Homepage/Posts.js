@@ -5,8 +5,8 @@ import { Markup } from "interweave";
 function Posts() {
     const { posts } = useContext(PostContext);
 
-    const PostJSX = posts.map(({ slug, title: { rendered }, imgUrl }, index) => {
-        return <Box link={slug} image={imgUrl} text={rendered} key={index} />;
+    const PostJSX = posts.map(({ slug, title: { rendered }, _embedded }, index) => {
+        return <Box link={slug} _embedded={_embedded} text={rendered} key={index} />;
     });
     return (
         <section id="posts">
@@ -18,7 +18,7 @@ function Posts() {
 
 export default Posts;
 
-function Box({ link, image, text }) {
+function Box({ link, _embedded, text }) {
     return (
         <div>
             <Link
@@ -30,7 +30,7 @@ function Box({ link, image, text }) {
                     });
                 }}
             >
-                <img src={image} alt="" />
+                <img src={_embedded["wp:featuredmedia"][0].source_url} alt="" />
                 <div className="back">
                     <div>
                         <Markup content={text} />

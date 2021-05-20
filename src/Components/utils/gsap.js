@@ -144,8 +144,8 @@ export function NavBarAnim() {
 
     nav_timeline
         .to(Nav, { left: 0, opacity: 1, duration: 0.5 })
-        .from(NavLinks, { y: 100, duration: 1, ease: "Power4.out()" })
-        .to(NavLinks, { opacity: 1, duration: 0.75, ease: "Power4.out()" }, "-=.75");
+        .from(".navlinkItem > a", { y: 100, duration: 1, ease: "Power4.out()" })
+        .to(".navlinkItem > a", { opacity: 1, duration: 0.75, ease: "Power4.out()" }, "-=.75");
 
     ham.addEventListener("click", (e) => {
         const dropdown = document.querySelector(".dropdown");
@@ -159,7 +159,6 @@ export function NavBarAnim() {
         if (ham.classList.contains("open")) {
             mobile_click.play();
             nav_timeline.play();
-            console.log(1);
         } else {
             mobile_click.reverse();
             nav_timeline.reverse();
@@ -171,9 +170,10 @@ export function NavBarAnim() {
         NavLinks[index].addEventListener("click", function (e) {
             const dropdown = document.querySelector(".dropdown");
             if (this.id === "ind_dropList") {
+                console.log(1);
                 e.preventDefault();
-                gsap.to(".dropdown", { x: "100%", duration: 0.75 });
-                dropdown.classList.remove("sublist_open");
+                gsap.to(".dropdown", { x: "0%", duration: 0.75 });
+                dropdown.classList.add("sublist_open");
                 return;
             } else {
                 nav_timeline.reverse();
@@ -184,7 +184,6 @@ export function NavBarAnim() {
 }
 
 export function ContactAnim() {
-    const params = {};
     gsap.to("#contact .info", {
         scrollTrigger: "#contact .info",
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
