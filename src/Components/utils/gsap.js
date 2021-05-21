@@ -169,7 +169,7 @@ export function NavBarAnim() {
         // eslint-disable-next-line no-loop-func
         NavLinks[index].addEventListener("click", function (e) {
             const dropdown = document.querySelector(".dropdown");
-            if (this.id === "ind_dropList") {
+            if (this.id === "ind_dropList" && window.innerWidth < 1000) {
                 console.log(1);
                 e.preventDefault();
                 gsap.to(".dropdown", { x: "0%", duration: 0.75 });
