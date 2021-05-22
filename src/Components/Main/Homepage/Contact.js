@@ -17,7 +17,7 @@ function Contact() {
     async function submit_message(e) {
         e.preventDefault();
         try {
-            const response = await fetch("https://chatcloud.co/wp-admin/admin-ajax.php", {
+            await fetch("https://chatcloud.co/wp-admin/admin-ajax.php", {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json",
