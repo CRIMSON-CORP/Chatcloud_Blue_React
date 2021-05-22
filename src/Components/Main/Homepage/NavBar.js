@@ -1,10 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { PostContext } from "../../utils/context";
 import { NavBarAnim } from "../../utils/gsap";
+import $ from "jquery";
 function NavBar({ white }) {
     useEffect(() => {
         NavBarAnim();
+        const links = document.querySelectorAll("li.navlinkItem a");
+        for (let index = 0; index < links.length; index++) {
+            links[index].addEventListener("click", function () {
+                $("svg.mobile_nav").removeClass("open");
+                document.querySelector("body").scrollTop = 0;
+                window.scrollTo({
+                    top: 0,
+                });
+            });
+        }
     }, []);
+    const { pages } = useContext(PostContext);
+
+    const pagesJSX = pages.map(({ slug, title: { rendered } }, index) => {
+        return (
+            <li key={index}>
+                <NavLink activeClassName="active" to={`/${slug}`} className="list-group-item">
+                    {rendered}
+                </NavLink>
+            </li>
+        );
+    });
     return (
         <header
             className={`d-flex justify-content-between p-3 px-5 align-items-center ${
@@ -44,73 +67,8 @@ function NavBar({ white }) {
                         >
                             Industries
                         </NavLink>
-                        <div className="dropdown">
-                            <ul className="list-unstyled">
-                                <li>
-                                    <a
-                                        href="<?php echo get_template_directory_uri(); ?>/pages/industries/autoDealership.php"
-                                        className="list-group-item"
-                                    >
-                                        Auto DealerShip
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="<?php echo get_template_directory_uri(); ?>/pages/industries/Ecommerce.php"
-                                        className="list-group-item"
-                                    >
-                                        E-commerce
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="<?php echo get_template_directory_uri(); ?>/pages/industries/education.php"
-                                        className="list-group-item"
-                                    >
-                                        Education
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="<?php echo get_template_directory_uri(); ?>/pages/industries/event_management.php"
-                                        className="list-group-item"
-                                    >
-                                        Event Management
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="<?php echo get_template_directory_uri(); ?>/pages/industries/healthcare.php"
-                                        className="list-group-item"
-                                    >
-                                        Health Care
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="<?php echo get_template_directory_uri(); ?>/pages/industries/HomeImprovements.php"
-                                        className="list-group-item"
-                                    >
-                                        Home Improvement
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="<?php echo get_template_directory_uri(); ?>/pages/industries/LawFirms.php"
-                                        className="list-group-item"
-                                    >
-                                        Law Firms
-                                    </a>
-                                </li>
-                                <li>
-                                    <a
-                                        href="<?php echo get_template_directory_uri(); ?>/pages/industries/RealEstate.php"
-                                        className="list-group-item"
-                                    >
-                                        Real Estate
-                                    </a>
-                                </li>
-                            </ul>
+                        <div className="dropdown shadow">
+                            <ul className="list-unstyled">{pagesJSX}</ul>
                         </div>
                     </li>
                     <li className="navlinkItem">
@@ -119,7 +77,7 @@ function NavBar({ white }) {
                         </NavLink>
                     </li>
                     <li className="navlinkItem">
-                        <NavLink to="/contact" activeClassName="active">
+                        <NavLink to="/contact-us" activeClassName="active">
                             Contact Us
                         </NavLink>
                     </li>

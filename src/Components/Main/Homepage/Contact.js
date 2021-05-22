@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 import {
     FaEnvelope,
     FaFacebook,
@@ -7,11 +7,38 @@ import {
     FaPhone,
     FaTwitter,
 } from "react-icons/fa";
-import { ContactAnim } from "../../utils/gsap";
+import { BiPaperPlane } from "react-icons/bi";
 function Contact() {
-    useEffect(() => {
-        ContactAnim();
-    }, []);
+    const name = useRef();
+    const email = useRef();
+    const message = useRef();
+    const Form = useRef();
+
+    async function submit_message(e) {
+        e.preventDefault();
+        try {
+            const response = await fetch("https://chatcloud.co/wp-admin/admin-ajax.php", {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    accept: "*/*",
+                    "access-control-allow-credentials": true,
+                    "zccess-control-allow-origin": "https://chatcloud.co",
+                    "referrer-policy": "strict-origin-when-cross-origin",
+                },
+                "Form Data": JSON.stringify({
+                    us_form_1_text_1: name.current.value,
+                    us_form_1_text_2: email.current.value,
+                    us_form_1_textarea_1: message.current.value,
+                    action: "us_ajax_cform",
+                    post_id: Math.ceil(Math.random() * 9999),
+                }),
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <section id="contact">
             <div className="rows">
@@ -26,25 +53,40 @@ function Contact() {
                             </li>
                             <li>
                                 <FaPhone />
-                                <p>+1 (701) 638-1622</p>
+                                <p>
+                                    <a href="tel:+1 (701) 638-1622" style={{ color: "white" }}>
+                                        +1 (701) 638-1622
+                                    </a>
+                                </p>
                             </li>
                             <li>
                                 <FaEnvelope />
-                                <p>info@chatcloud.co</p>
+                                <p>
+                                    <a
+                                        href="mailto:felicia@chatcloud.co"
+                                        style={{ color: "white" }}
+                                    >
+                                        info@chatcloud.co
+                                    </a>
+                                </p>
                             </li>
                         </ul>
                     </div>
                     <div className="social_links">
-                        <FaFacebook />
+                        <a href="https://www.facebook.com/ChatCloud.co">
+                            <FaFacebook />
+                        </a>
                         <FaTwitter />
                         <FaFacebookMessenger />
                     </div>
                 </div>
                 <div className="col-md-6 mt-4 mt-md-0 form">
-                    <span className="bx bxs-paper-plane"></span>
+                    <span>
+                        <BiPaperPlane />
+                    </span>
                     <form
-                        action="/"
-                        method="post"
+                        onSubmit={submit_message}
+                        ref={Form}
                         className="form h-100 d-flex flex-column px-4 px-md-5 py-3 justify-content-center"
                     >
                         <div className="form-group">
@@ -54,6 +96,7 @@ function Contact() {
                                 name="name"
                                 className="form-control"
                                 placeholder="John Doe"
+                                ref={name}
                             />
                         </div>
                         <div className="form-group mt-4">
@@ -63,6 +106,7 @@ function Contact() {
                                 name="email"
                                 className="form-control"
                                 placeholder="johndoe@email.com"
+                                ref={email}
                             />
                         </div>
                         <div className="form-group mt-4">
@@ -71,6 +115,7 @@ function Contact() {
                                 id=""
                                 name="message"
                                 className="form-control"
+                                ref={message}
                                 placeholder="Your message here..."
                             ></textarea>
                         </div>

@@ -12,11 +12,11 @@ import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 function Industries() {
     const image_labels = document.querySelectorAll("label");
 
-    const radio = useRef()
+    const radio = useRef();
 
-    useEffect(()=>{
-        radio.current.checked = true
-    },[])
+    useEffect(() => {
+        radio.current.checked = true;
+    }, []);
     var slideIndex = 1;
     showSlides(slideIndex);
 

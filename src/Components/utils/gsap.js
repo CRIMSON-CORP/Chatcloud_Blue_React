@@ -30,30 +30,16 @@ export function AllAnimations() {
             "-=1.5"
         );
 
-    const ind_link = document.querySelector("#ind_dropList");
+    const ind_link = get("#ind_dropList");
     ind_link.addEventListener("click", function (e) {
         if (ind_link && window.innerWidth < 1000) {
             e.preventDefault();
             gsap.to(".dropdown", { x: 0, duration: 0.75 });
-            document.querySelector(".dropdown").classList.add("sublist_open");
+            get(".dropdown").classList.add("sublist_open");
         }
     });
 
     gsap.registerPlugin(ScrollTrigger);
-    const items = gsap.utils.toArray(".grid_item");
-    items.forEach((item) => {
-        gsap.from(item, {
-            scrollTrigger: item,
-            y: 100,
-            opacity: 0,
-            start: "center bottom",
-            duration: 1,
-            scale: 0.5,
-            transformOrigin: "center center",
-            ease: "power4.Out",
-            stagger: { each: 0.25 },
-        });
-    });
     const items_posts = gsap.utils.toArray("#posts .grid > div");
     items_posts.forEach((item_post) => {
         gsap.from(item_post, {
@@ -128,7 +114,7 @@ export function NavBarAnim() {
 
     // NAV
     const Nav = get("nav");
-    const NavLinks = getAll("nav a");
+    const NavLinks = getAll("nav > ul > li > a");
     // GSAP
     //// Navigation timelines
     const mobile_click = gsap.timeline({ reversed: true });
@@ -148,7 +134,7 @@ export function NavBarAnim() {
         .to(".navlinkItem > a", { opacity: 1, duration: 0.75, ease: "Power4.out()" }, "-=.75");
 
     ham.addEventListener("click", (e) => {
-        const dropdown = document.querySelector(".dropdown");
+        const dropdown = get(".dropdown");
         if (dropdown.classList.contains("sublist_open")) {
             e.preventDefault();
             gsap.to(".dropdown", { x: "100%", duration: 0.75 });
@@ -165,15 +151,26 @@ export function NavBarAnim() {
         }
     });
 
+    const droplinks = getAll("li.navlinkItem.link-drop > div > ul > li a");
+    const dropdown = get(".dropdown");
+    for (let index = 0; index < droplinks.length; index++) {
+        droplinks[index].addEventListener("click", () => {
+            gsap.to(".dropdown", { x: "100%", duration: 0.75 });
+            dropdown.classList.remove("sublist_open");
+            ham.classList.remove("open");
+            nav_timeline.reverse();
+            mobile_click.reverse();
+        });
+    }
+
     for (let index = 0; index < NavLinks.length; index++) {
         // eslint-disable-next-line no-loop-func
         NavLinks[index].addEventListener("click", function (e) {
-            const dropdown = document.querySelector(".dropdown");
             if (this.id === "ind_dropList" && window.innerWidth < 1000) {
-                console.log(1);
                 e.preventDefault();
                 gsap.to(".dropdown", { x: "0%", duration: 0.75 });
                 dropdown.classList.add("sublist_open");
+                ham.classList.remove("open");
                 return;
             } else {
                 nav_timeline.reverse();
@@ -181,31 +178,4 @@ export function NavBarAnim() {
             }
         });
     }
-}
-
-export function ContactAnim() {
-    gsap.to("#contact .info", {
-        scrollTrigger: "#contact .info",
-        clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-        start: "center center",
-        duration: 2,
-        transformOrigin: "center center",
-        ease: "power4.inOut",
-    });
-    gsap.fromTo(
-        "#contact .form",
-        {
-            scrollTrigger: "#contact .info",
-            y: 100,
-            opacity: 0,
-            start: "center bottom",
-            duration: 1,
-            transformOrigin: "center center",
-            ease: "power4.Out",
-        },
-        {
-            y: 0,
-            opacity: 1,
-        }
-    );
 }

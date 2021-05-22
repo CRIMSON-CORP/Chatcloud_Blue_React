@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaEdit, FaFacebook, FaFileInvoiceDollar, FaGlobe, FaSms } from "react-icons/fa";
 function Services() {
+    useEffect(() => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const items = gsap.utils.toArray(".grid_item");
+        items.forEach((item) => {
+            gsap.from(item, {
+                scrollTrigger: item,
+                y: 100,
+                opacity: 0,
+                start: "center bottom",
+                duration: 1,
+                scale: 0.5,
+                transformOrigin: "center center",
+                ease: "power4.Out",
+                stagger: { each: 0.25 },
+            });
+        });
+    });
     const card = [
         {
             icon: <FaGlobe />,
@@ -28,14 +48,12 @@ function Services() {
         {
             icon: <FaEdit />,
             h3: "Customized Questions & Responses",
-            text: `24/7 Live Chat feature for your website to generate leads from the
-                         traffic.`,
+            text: `Unlimited customized set of questions and responses according to your specific needs.`,
         },
         {
             icon: <FaFileInvoiceDollar />,
             h3: "No Obligation Free Trial",
-            text: `24/7 Live Chat feature for your website to generate leads from the
-                         traffic.`,
+            text: `We offer a 14 days free trial with no upfront fee or any credit card information.`,
         },
     ];
 

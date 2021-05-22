@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { AllAnimations } from "../utils/gsap";
-import { jqueryCode } from "../utils/jquery";
 import About from "./Homepage/About";
 import Contact from "./Homepage/Contact";
 import GetStared from "./Homepage/GetStared";
@@ -14,7 +13,6 @@ function Homepage() {
     useEffect(() => {
         setTimeout(() => {
             AllAnimations();
-            jqueryCode();
         }, 100);
 
         $(window).scroll(function () {

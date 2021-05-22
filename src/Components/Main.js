@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Route, Switch } from "react-router";
 import BlogPost from "./Main/BlogPost";
 import Homepage from "./Main/Homepage";
@@ -9,9 +9,12 @@ import Industries from "./Main/Homepage/Industries";
 import NavBar from "./Main/Homepage/NavBar";
 import Services from "./Main/Homepage/Services";
 import { PostContext } from "./utils/context";
-
+import { jqueryCode } from "./utils/jquery";
 function Main() {
     const { loading } = useContext(PostContext);
+    useEffect(() => {
+        jqueryCode();
+    }, [loading]);
 
     return loading ? (
         <div className="loader">
@@ -30,7 +33,7 @@ function Main() {
                     <Industries />
                     <GetStared />
                 </Route>
-                <Route path="/contact">
+                <Route path="/contact-us">
                     <NavBar white={true} />
                     <Contact />
                 </Route>

@@ -9,21 +9,19 @@ function GetStared() {
                     Give us a call or send an email. After understanding your needs we will assign
                     you an Accounts Manager who is going to provide you with our plugin.
                 </p>
-                <button className="slide px-3 py-2 text-uppercase rounded">
-                    <span className="text">
-                        <Link
-                            to="/contact"
-                            onClick={(e) => {
-                                window.scrollTo({
-                                    top: 0,
-                                    scrollBehavior: "auto",
-                                });
-                            }}
-                        >
-                            Contact Us
-                        </Link>
-                    </span>
-                </button>
+                <Link
+                    to="/contact-us"
+                    onClick={(e) => {
+                        window.scrollTo({
+                            top: 0,
+                            scrollBehavior: "auto",
+                        });
+                    }}
+                >
+                    <button className="slide px-3 py-2 text-uppercase rounded">
+                        <span className="text">Contact Us</span>
+                    </button>
+                </Link>
             </div>
         </section>
     );

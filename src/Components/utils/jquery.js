@@ -10,20 +10,4 @@ export function jqueryCode() {
             $("header").removeClass("home_sticky");
         }
     });
-
-    $(".navlinkItem ").click(function () {
-        $(".navlinkItem").removeClass("active");
-        $(this).addClass("active");
-        document.querySelector("body").scrollTop = 0;
-        window.scrollTo({
-            top: 0,
-        });
-    });
-    $(" button.slide ").click(() => {
-        document.querySelector("body").scrollTop = 0;
-        window.scrollTo({
-            top: 0,
-            scrollBehavior: "auto",
-        });
-    });
 }
