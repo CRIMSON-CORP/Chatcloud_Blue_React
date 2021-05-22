@@ -45,11 +45,6 @@
     <script>
         $(document).ready(function () {
             function setVeno() {
-                if ($(".venobox").length == 0) {
-                    return setTimeout(() => {
-                        setVeno();
-                    }, 100);
-                }
                 $(".venobox").venobox({
                     framewidth: window.innerWidth < 400 ? "80vw" : "60vw",
                     titleattr: "data-title",
@@ -60,7 +55,7 @@
                     closeBackground: "#000000ff",
                 });
             }
-            setVeno();
+            setInterval(setVeno, 100);
         });
     </script>
 </html>
