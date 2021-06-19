@@ -54,7 +54,7 @@ button.slide {
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-button.slide span.text,
+.slide span.text,
 button.slide span.text a {
     color: #2e54bf;
     z-index: 2;
@@ -149,6 +149,11 @@ button.slide.invert:hover::before {
 button.slide.invert:hover,
 button.slide.invert:hover span.text {
     color: #2e54bf;
+}
+
+button.slide:active {
+    transform: scale(0.95) !important;
+    transition-delay: 0s !important;
 }
 
 .loader {
@@ -1413,6 +1418,10 @@ section#contact .info::after {
 section#contact .form {
     position: relative;
 }
+section#contact form {
+    position: relative;
+    padding: 50px !important;
+}
 
 section#contact .form svg {
     color: #2e54bf;
@@ -1494,6 +1503,12 @@ section#contact .form button[type="submit"].form-submit {
     -ms-flex-item-align: end;
     align-self: flex-end;
     border-radius: 5px;
+    transition: transform 0.3s ease;
+    min-width: 200px;
+}
+
+section#contact .form button[type="submit"].form-submit:active {
+    transform: scale(0.95);
 }
 
 section#footer {
@@ -1544,9 +1559,21 @@ section#footer {
 }
 
 @media (max-width: 400px) {
-    section#contact .info {
+    section#contact .info,
+    section#contact form {
         min-height: 600px;
-        padding: 30px;
+        padding: 30px 20px !important;
+    }
+
+    section#contact .info .social_links {
+        bottom: 30px;
+        left: 20px;
+    }
+
+    section#contact .form .form-group label,
+    section#contact .form .form-group input,
+    section#contact .form .form-group textarea {
+        font-size: 16px;
     }
 }
 
@@ -1563,7 +1590,6 @@ body.industries main .grid {
     display: grid;
     -ms-grid-columns: 30% 70%;
     grid-template-columns: 30% 70%;
-    gap: 50px;
 }
 
 body.industries main .grid img {
@@ -1571,7 +1597,7 @@ body.industries main .grid img {
     width: 100%;
     -o-object-fit: cover;
     object-fit: cover;
-    max-height: 80vh;
+    max-height: 600px;
     -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
     clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
 }
@@ -1598,9 +1624,9 @@ body.industries main .grid .content .content_footer {
 @media (max-width: 900px) {
     body.industries main .grid {
         margin-top: 0 !important;
-        -ms-grid-columns: auto;
-        grid-template-columns: auto;
-        gap: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
     body.industries main .grid img {
         -o-object-position: unset !important;
@@ -1652,7 +1678,7 @@ body.blog main img {
 }
 
 body.blog main .content {
-    padding: 0 !important;
+    padding: 20px !important;
 }
 
 body.blog main .content p {
@@ -1770,7 +1796,7 @@ body.blog div.content {
 }
 
 body.blog.industries .content {
-    margin: 50px;
+    margin: 30px;
 }
 body.blog.industries .content section {
     padding: 0;
@@ -1795,10 +1821,11 @@ body.blog.industries .content section#about::before {
     display: none;
 }
 
-body.blog.industries .content p span {
-    color: white !important;
+body.blog.industries .content span {
+    display: inline-block !important;
 }
 body.blog.industries .content ul li span {
+    display: inline-block !important;
     color: white !important;
 }
 body.blog.industries .content section#about strong {
@@ -1815,9 +1842,22 @@ body.blog.industries.page main {
     background: #678df8;
 }
 
+#root > main > div > div.row.h-100 {
+    padding: 0 !important;
+}
+
 @media only screen and (max-width: 500px) {
     body.blog.industries .content {
-        margin: 5px;
+        margin: 0px;
+        padding: 0 !important;
+    }
+
+    body.blog.industries.page .content {
+        margin: 20px;
+        padding: 0 !important;
+    }
+    body.industries.blog main .grid .row img {
+        padding: 0 !important;
     }
 
     body.blog.industries .content section#about .wpb_wrapper h3,

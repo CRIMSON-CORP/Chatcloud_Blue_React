@@ -8,13 +8,25 @@ import Six from "../../../images/industries/6.jpg";
 import Seven from "../../../images/industries/7.jpg";
 import Eight from "../../../images/industries/8.jpg";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
+import $ from "jquery";
+import "venobox/venobox/venobox";
+import "venobox/venobox/venobox.min.css";
+import { change_title } from "../../utils/utils";
 
 function Industries() {
     const image_labels = document.querySelectorAll("label");
-
     const radio = useRef();
-
     useEffect(() => {
+        $(".venobox").venobox({
+            framewidth: window.innerWidth < 400 ? "80vw" : "60vw",
+            titleattr: "data-title",
+            infinigall: true,
+            spinner: "wave",
+            spinColor: "#fff",
+            closeColor: "#fff",
+            closeBackground: "#000000ff",
+        });
+        change_title();
         radio.current.checked = true;
     }, []);
     var slideIndex = 1;
@@ -78,78 +90,107 @@ function Industries() {
                     <input type="radio" name="slider" id="s8" className="input" />
 
                     <label htmlFor="s1" id="slide1">
-                        <a className="venobox" href={One} data-title="Legal" data-gall="industries">
-                            <img src={One} alt="" />
+                        <a
+                            className="venobox"
+                            href={"https://chatcloud.co/wp-content/themes/build" + One}
+                            data-title="Legal"
+                            data-gall="industries"
+                        >
+                            <img
+                                src={"https://chatcloud.co/wp-content/themes/build" + One}
+                                alt=""
+                            />
                         </a>
                     </label>
                     <label htmlFor="s2" id="slide2">
                         <a
                             className="venobox"
-                            href={Two}
+                            href={"https://chatcloud.co/wp-content/themes/build" + Two}
                             data-title="Home Improvements"
                             data-gall="industries"
                         >
-                            <img src={Two} alt="" />
+                            <img
+                                src={"https://chatcloud.co/wp-content/themes/build" + Two}
+                                alt=""
+                            />
                         </a>
                     </label>
                     <label htmlFor="s3" id="slide3">
                         <a
                             className="venobox"
-                            href={Three}
+                            href={"https://chatcloud.co/wp-content/themes/build" + Three}
                             data-title="Health Care"
                             data-gall="industries"
                         >
-                            <img src={Three} alt="" />
+                            <img
+                                src={"https://chatcloud.co/wp-content/themes/build" + Three}
+                                alt=""
+                            />
                         </a>
                     </label>
                     <label htmlFor="s4" id="slide4">
                         <a
                             className="venobox"
-                            href={Four}
+                            href={"https://chatcloud.co/wp-content/themes/build" + Four}
                             data-title="Event Planner"
                             data-gall="industries"
                         >
-                            <img src={Four} alt="" />
+                            <img
+                                src={"https://chatcloud.co/wp-content/themes/build" + Four}
+                                alt=""
+                            />
                         </a>
                     </label>
                     <label htmlFor="s5" id="slide5">
                         <a
                             className="venobox"
-                            href={Five}
+                            href={"https://chatcloud.co/wp-content/themes/build" + Five}
                             data-title="Education"
                             data-gall="industries"
                         >
-                            <img src={Five} alt="" />
+                            <img
+                                src={"https://chatcloud.co/wp-content/themes/build" + Five}
+                                alt=""
+                            />
                         </a>
                     </label>
                     <label htmlFor="s6" id="slide6">
                         <a
                             className="venobox"
-                            href={Six}
+                            href={"https://chatcloud.co/wp-content/themes/build" + Six}
                             data-title="E-commerce"
                             data-gall="industries"
                         >
-                            <img src={Six} alt="" />
+                            <img
+                                src={"https://chatcloud.co/wp-content/themes/build" + Six}
+                                alt=""
+                            />
                         </a>
                     </label>
                     <label htmlFor="s7" id="slide7">
                         <a
                             className="venobox"
-                            href={Seven}
+                            href={"https://chatcloud.co/wp-content/themes/build" + Seven}
                             data-title="Auto Dealer"
                             data-gall="industries"
                         >
-                            <img src={Seven} alt="" />
+                            <img
+                                src={"https://chatcloud.co/wp-content/themes/build" + Seven}
+                                alt=""
+                            />
                         </a>
                     </label>
                     <label htmlFor="s8" id="slide8">
                         <a
                             className="venobox"
-                            href={Eight}
+                            href={"https://chatcloud.co/wp-content/themes/build" + Eight}
                             data-title="Real Estate"
                             data-gall="industries"
                         >
-                            <img src={Eight} alt="" />
+                            <img
+                                src={"https://chatcloud.co/wp-content/themes/build" + Eight}
+                                alt=""
+                            />
                         </a>
                     </label>
 

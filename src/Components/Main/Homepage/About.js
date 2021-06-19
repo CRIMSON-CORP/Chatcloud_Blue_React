@@ -3,7 +3,11 @@ import about from "../../../images/about.jpg";
 function About() {
     return (
         <section id="about">
-            <img src={about} alt="" className="bg" />
+            <img
+                src={"https://chatcloud.co/wp-content/themes/build" + about}
+                alt=""
+                className="bg"
+            />
             <div className="text-center content">
                 <h1 className="mb-4 font-weight-bold head-text">
                     About <br />

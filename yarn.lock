@@ -7040,7 +7040,7 @@
   "resolved" "https://registry.npmjs.org/jquery.easing/-/jquery.easing-1.4.1.tgz"
   "version" "1.4.1"
 
-"jquery@^3.6.0":
+"jquery@^3.6.0", "jquery@>=1.7.0":
   "integrity" "sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw=="
   "resolved" "https://registry.npmjs.org/jquery/-/jquery-3.6.0.tgz"
   "version" "3.6.0"
@@ -11932,6 +11932,13 @@
   "integrity" "sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w=="
   "resolved" "https://registry.npmjs.org/vendors/-/vendors-1.0.4.tgz"
   "version" "1.0.4"
+
+"venobox@^1.9.3":
+  "integrity" "sha512-+J1WkS4zBe6vZ/5EQU5b/vySMsM1yzvJZ4fbsi6BE5QVV3fzSUoxGIwOW+yD7Yw6igKAtZNR+1A8hvIalNbQeQ=="
+  "resolved" "https://registry.npmjs.org/venobox/-/venobox-1.9.3.tgz"
+  "version" "1.9.3"
+  dependencies:
+    "jquery" ">=1.7.0"
 
 "verror@1.10.0":
   "integrity" "sha1-OhBcoXBTr1XW4nDB+CiGguGNpAA="

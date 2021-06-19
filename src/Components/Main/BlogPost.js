@@ -5,6 +5,7 @@ import NavBar from "./Homepage/NavBar";
 import { Markup } from "interweave";
 import { gsap } from "gsap";
 import GetStared from "./Homepage/GetStared";
+import { change_title } from "../utils/utils";
 function BlogPost() {
     const { posts, pages } = useContext(PostContext);
     useEffect(() => {
@@ -138,6 +139,10 @@ function Main({ title, date, imgUrl, formatDate, content }) {
     const Blog_head = useRef();
 
     useEffect(() => {
+        change_title();
+    }, []);
+
+    useEffect(() => {
         const timeline = gsap.timeline({});
         Blog_head.current &&
             Idn_content.current &&
@@ -203,7 +208,24 @@ function MainPages({ title, imgUrl, content }) {
     const Blog_head = useRef();
 
     useEffect(() => {
+        change_title();
         document.querySelector("body").classList.add("page");
+
+        setTimeout(() => {
+            const c = document.querySelector("body.blog.page main .content");
+            const p = document.querySelectorAll("body.blog.page .content p");
+            for (let index = 0; index < p.length; index++) {
+                if (p[index].innerHTML[0] === "[") {
+                    p[index].style.display = "none";
+                }
+            }
+            const allSpan = c.querySelectorAll("span, a");
+            for (let index = 0; index < allSpan.length; index++) {
+                allSpan[index].style.color = "white";
+            }
+            c.querySelector("h2").style.display = "none";
+            c.querySelector("h5").style.display = "none";
+        }, 100);
         return () => {
             document.querySelector("body").classList.remove("page");
         };
@@ -255,8 +277,25 @@ function MainPages({ title, imgUrl, content }) {
                         <Markup content={title.rendered} />
                     </div>
                     <Markup content={content.rendered} />
+                    <PageFooter />
                 </div>
             </div>
         </main>
+    );
+}
+
+function PageFooter() {
+    return (
+        <span style={{ color: "white" }}>
+            <em>
+                <strong>
+                    If you’re looking for a service provider with a 24/7 availability to generate
+                    leads for you via your google ad clicks, social media or website then get our
+                    Live Chat feature for your website at free of cost with a 14 day free trial. For
+                    more details, please call us now, OR click the Live Chat to talk with one of our
+                    representatives available 24/7.
+                </strong>
+            </em>
+        </span>
     );
 }

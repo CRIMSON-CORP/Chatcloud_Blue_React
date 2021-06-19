@@ -47,12 +47,17 @@ function Hero() {
                 className="hero-slider-item d-flex align-items-center justify-content-start h-100 w-100 swiper-slide"
             >
                 <div className="background">
-                    <img src={img} alt="" />
+                    <img src={"https://chatcloud.co/wp-content/themes/build" + img} alt="" />
                 </div>
                 <div className="content px-5">
                     <h1 className="font-weight-bold">{header}</h1>
                     <p>{text}</p>
-                    <button className="slide px-3 py-2 text-uppercase rounded rev-btn rs-wtbindex rs-layer rs-waction rs-wclickaction">
+                    <button
+                        className="slide px-3 py-2 text-uppercase rounded rev-btn"
+                        onClick={() => {
+                            window.chatcloud && window.chatcloud.toggle();
+                        }}
+                    >
                         <span className="text">talk to us now</span>
                     </button>
                 </div>
@@ -70,7 +75,7 @@ function Hero() {
                     loop={true}
                     direction={"vertical"}
                     autoplay={{
-                        delay: 5000,
+                        delay: 10000,
                     }}
                     allowTouchMove={false}
                     speed={1300}
@@ -79,14 +84,24 @@ function Hero() {
                     <SwiperSlide className="hero-slider-item d-flex align-items-center justify-content-start h-100 w-100 swiper-slide">
                         <div className="background">
                             <video autoPlay={true} loop muted id="hero_vid">
-                                <source src={home_video} type="video/webm" />
+                                <source
+                                    src={
+                                        "https://chatcloud.co/wp-content/themes/build" + home_video
+                                    }
+                                    type="video/webm"
+                                />
                                 Your browser does not support the video tag.
                             </video>
                         </div>
                         <div className="content px-5">
                             <h1 className="font-weight-bold">24/7 Live Chat Services</h1>
                             <p>Increase your sales and engage your visitors via Live Chat.</p>
-                            <button className="slide px-3 py-2 text-uppercase rounded">
+                            <button
+                                className="slide px-3 py-2 text-uppercase rounded"
+                                onClick={() => {
+                                    window.chatcloud && window.chatcloud.toggle();
+                                }}
+                            >
                                 <span className="text">talk to us now</span>
                             </button>
                         </div>

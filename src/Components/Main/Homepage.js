@@ -9,6 +9,7 @@ import Posts from "./Homepage/Posts";
 import Services from "./Homepage/Services";
 import "jquery.easing";
 import $ from "jquery";
+import { change_title } from "../utils/utils";
 function Homepage() {
     useEffect(() => {
         setTimeout(() => {
@@ -22,6 +23,7 @@ function Homepage() {
                 $(".back-to-top").fadeOut("slow");
             }
         });
+        change_title();
     }, []);
     return (
         <>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaEdit, FaFacebook, FaFileInvoiceDollar, FaGlobe, FaSms } from "react-icons/fa";
+import { change_title } from "../../utils/utils";
 function Services() {
     useEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
@@ -20,7 +21,9 @@ function Services() {
                 stagger: { each: 0.25 },
             });
         });
-    });
+        change_title();
+        console.clear();
+    }, []);
     const card = [
         {
             icon: <FaGlobe />,

@@ -104,6 +104,7 @@ export function AllAnimations() {
         scrollTrigger: "#contact .form",
         ...params,
     });
+    console.clear();
 }
 
 export function NavBarAnim() {
@@ -155,6 +156,7 @@ export function NavBarAnim() {
     const dropdown = get(".dropdown");
     for (let index = 0; index < droplinks.length; index++) {
         droplinks[index].addEventListener("click", () => {
+            if (window.innerWidth > 1000) return;
             gsap.to(".dropdown", { x: "100%", duration: 0.75 });
             dropdown.classList.remove("sublist_open");
             ham.classList.remove("open");

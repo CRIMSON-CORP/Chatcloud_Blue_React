@@ -1,42 +1,53 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import {
     FaEnvelope,
     FaFacebook,
     FaFacebookMessenger,
     FaGlobe,
     FaPhone,
-    FaTwitter,
+    FaLinkedin,
 } from "react-icons/fa";
 import { BiPaperPlane } from "react-icons/bi";
+import { change_title, Notification } from "../../utils/utils";
 function Contact() {
+    const [sending, setSending] = useState(false);
     const name = useRef();
     const email = useRef();
     const message = useRef();
     const Form = useRef();
+    useEffect(() => {
+        change_title();
+    }, []);
 
     async function submit_message(e) {
         e.preventDefault();
-        try {
-            await fetch("https://chatcloud.co/wp-admin/admin-ajax.php", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                    accept: "*/*",
-                    "access-control-allow-credentials": true,
-                    "zccess-control-allow-origin": "https://chatcloud.co",
-                    "referrer-policy": "strict-origin-when-cross-origin",
-                },
-                "Form Data": JSON.stringify({
-                    us_form_1_text_1: name.current.value,
-                    us_form_1_text_2: email.current.value,
-                    us_form_1_textarea_1: message.current.value,
-                    action: "us_ajax_cform",
-                    post_id: Math.ceil(Math.random() * 9999),
-                }),
-            });
-        } catch (err) {
-            console.log(err);
-        }
+        const data = new FormData();
+        data.append("name", name.current.value);
+        data.append("email", email.current.value);
+        data.append("message", message.current.value);
+        data.append("post_id", Math.ceil(Math.random() * 9999));
+
+        const xhr = new XMLHttpRequest();
+        setSending(true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                let response = xhr.responseText;
+                if (response === "success") {
+                    Notification("success", "Message Sent!", "Your message has been sent!", 3000);
+                    name.current.value = email.current.value = message.current.value = null;
+                } else {
+                    Notification(
+                        "danger",
+                        "Message not Sent!",
+                        "Your message could not be sent!",
+                        3000
+                    );
+                }
+                setSending(false);
+            }
+        };
+        xhr.open("POST", "https://chatcloud.co/wp-content/themes/build/ajax.php", true);
+        xhr.send(data);
     }
 
     return (
@@ -73,14 +84,26 @@ function Contact() {
                         </ul>
                     </div>
                     <div className="social_links">
-                        <a href="https://www.facebook.com/ChatCloud.co">
+                        <a
+                            href="https://www.facebook.com/ChatCloud.co"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
                             <FaFacebook />
                         </a>
-                        <FaTwitter />
-                        <FaFacebookMessenger />
+                        <a href="https://m.me/chatcloud.co" target="_blank" rel="noreferrer">
+                            <FaFacebookMessenger />
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/company/chatcloud-co"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <FaLinkedin />
+                        </a>
                     </div>
                 </div>
-                <div className="col-md-6 mt-4 mt-md-0 form">
+                <div className="col-md-6 mt-md-0 form">
                     <span>
                         <BiPaperPlane />
                     </span>
@@ -94,9 +117,10 @@ function Contact() {
                             <input
                                 type="text"
                                 name="name"
-                                className="form-control"
+                                className="form-control name"
                                 placeholder="John Doe"
                                 ref={name}
+                                required={true}
                             />
                         </div>
                         <div className="form-group mt-4">
@@ -104,9 +128,10 @@ function Contact() {
                             <input
                                 type="email"
                                 name="email"
-                                className="form-control"
+                                className="form-control email"
                                 placeholder="johndoe@email.com"
                                 ref={email}
+                                required={true}
                             />
                         </div>
                         <div className="form-group mt-4">
@@ -114,16 +139,17 @@ function Contact() {
                             <textarea
                                 id=""
                                 name="message"
-                                className="form-control"
+                                className="form-control message"
                                 ref={message}
                                 placeholder="Your message here..."
+                                required={true}
                             ></textarea>
                         </div>
                         <button
                             type="submit"
                             className="form-submit text-uppercase font-weight-bold mt-3"
                         >
-                            send message
+                            {sending ? <span className="spinner-border"></span> : "send message"}
                         </button>
                     </form>
                 </div>

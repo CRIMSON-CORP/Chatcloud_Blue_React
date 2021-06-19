@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { store } from "react-notifications-component";
+import { Notification } from "./utils";
 export const PostContext = createContext();
 
 async function sortData(data) {
@@ -12,26 +12,15 @@ async function sortData(data) {
     );
 }
 
-function Notification(type, title, message) {
-    store.addNotification({
-        title,
-        message,
-        type,
-        container: "top-left",
-        animationIn: ["animated", "fadeIn"],
-        animationOut: ["animated", "fadeOut"],
-        dismiss: {
-            duration: 2000,
-            touch: true,
-            click: true,
-        },
-    });
-}
-
 function PostsBlock({ children }) {
     const [posts, setPosts] = useState([]);
     const [pages, setPages] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const issue = {
+        issue: false,
+        warned: false,
+    };
 
     const pages_url =
         "https://chatcloud.co/wp-json/wp/v2/pages?per_page=30&orderby=slug&order=asc&_embed=true&exclude=10161,10608,8972,9715,10982,10582,10394,10394,10618";
@@ -57,7 +46,6 @@ function PostsBlock({ children }) {
                         data = await data.json();
                         res(await sortData(data));
                     } catch (err) {
-                        console.log(err);
                         rej("Error");
                     }
                 });
@@ -66,18 +54,33 @@ function PostsBlock({ children }) {
                 .then((data) => {
                     setPosts(data[0]);
                     setPages(data[1]);
-                    setLoading(false);
+                    issue.issue &&
+                        Notification(
+                            "success",
+                            "Connection Restored",
+                            `You're back Online!.`,
+                            5000
+                        );
                 })
                 .catch((err) => {
-                    setLoading(true);
-                    Notification(
-                        "danger",
-                        "No Connection",
-                        `You have no Internet Connection or its unstable, Retrying...`
-                    );
+                    issue.issue = true;
+                    setLoading(false);
+                    issue.issue &&
+                        !issue.warned &&
+                        Notification(
+                            "danger",
+                            "No Connection",
+                            `You have no Internet Connection or its unstable, some Pages may not render Correctly!`,
+                            5000
+                        );
+                    issue.warned = true;
                     setTimeout(() => {
                         fetchData();
-                    }, 5000);
+                        console.clear();
+                    }, 1000);
+                })
+                .then(() => {
+                    setLoading(false);
                 });
         }
         fetchData();
