@@ -1,0 +1,41 @@
+{
+  "files": {
+    "main.css": "/static/css/main.e8fc0fde.chunk.css",
+    "main.js": "/static/js/main.2a74089a.chunk.js",
+    "main.js.map": "/static/js/main.2a74089a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e19d547b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e19d547b.js.map",
+    "static/css/2.e8e17610.chunk.css": "/static/css/2.e8e17610.chunk.css",
+    "static/js/2.c1d2c985.chunk.js": "/static/js/2.c1d2c985.chunk.js",
+    "static/js/2.c1d2c985.chunk.js.map": "/static/js/2.c1d2c985.chunk.js.map",
+    "static/js/3.bad2fd6b.chunk.js": "/static/js/3.bad2fd6b.chunk.js",
+    "static/js/3.bad2fd6b.chunk.js.map": "/static/js/3.bad2fd6b.chunk.js.map",
+    "index.html": "/index.html",
+    "service-worker.js": "/service-worker.js",
+    "service-worker.js.map": "/service-worker.js.map",
+    "static/css/2.e8e17610.chunk.css.map": "/static/css/2.e8e17610.chunk.css.map",
+    "static/css/main.e8fc0fde.chunk.css.map": "/static/css/main.e8fc0fde.chunk.css.map",
+    "static/js/2.c1d2c985.chunk.js.LICENSE.txt": "/static/js/2.c1d2c985.chunk.js.LICENSE.txt",
+    "static/media/1.02cc1c8b.jpg": "/static/media/1.02cc1c8b.jpg",
+    "static/media/2.70fe5eed.jpg": "/static/media/2.70fe5eed.jpg",
+    "static/media/3.8cf9d0aa.jpg": "/static/media/3.8cf9d0aa.jpg",
+    "static/media/4.ade4ec3d.jpg": "/static/media/4.ade4ec3d.jpg",
+    "static/media/5.83bb9726.jpg": "/static/media/5.83bb9726.jpg",
+    "static/media/6.b908d604.jpg": "/static/media/6.b908d604.jpg",
+    "static/media/7.e9081a0c.jpg": "/static/media/7.e9081a0c.jpg",
+    "static/media/8.cc459096.jpg": "/static/media/8.cc459096.jpg",
+    "static/media/Home-Improvements.23039505.jpg": "/static/media/Home-Improvements.23039505.jpg",
+    "static/media/about.22077e95.jpg": "/static/media/about.22077e95.jpg",
+    "static/media/education.4b146496.jpg": "/static/media/education.4b146496.jpg",
+    "static/media/health_care.b97af3dc.jpg": "/static/media/health_care.b97af3dc.jpg",
+    "static/media/law_firms.d0131f2a.jpg": "/static/media/law_firms.d0131f2a.jpg",
+    "static/media/mixkit-texting-while-riding-a-train-21834-medium-1.ba1146a3.webm": "/static/media/mixkit-texting-while-riding-a-train-21834-medium-1.ba1146a3.webm"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e19d547b.js",
+    "static/css/2.e8e17610.chunk.css",
+    "static/js/2.c1d2c985.chunk.js",
+    "static/css/main.e8fc0fde.chunk.css",
+    "static/js/main.2a74089a.chunk.js"
+  ]
+}
